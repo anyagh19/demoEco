@@ -89,7 +89,7 @@ const offerSchema = new Schema(
     },
     towerName: {
       type: String,
-      
+
     },
     typeOfChute: {
       type: String,
@@ -134,6 +134,11 @@ const offerSchema = new Schema(
       type: String,
       enum: ["Draft", "Sent", "Accepted", "Rejected"],
       default: "Draft"
+    },
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true
     }
   },
   {

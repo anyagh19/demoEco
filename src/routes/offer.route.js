@@ -28,7 +28,7 @@ router.route("/create")
 
         res.render("offer" , defaultData)
     })
-    .post( createOffer)
+    .post(verifyJWT, createOffer)
 
 router.route("/all-offer")
    .get(getOffer)

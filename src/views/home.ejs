@@ -2,53 +2,74 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | Ecomatrix</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen">
 
-    <!-- Navbar -->
-    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-            <img onclick="window.location.href='/'"
-                src="https://4.imimg.com/data4/GJ/SY/MY-6614301/ecomatrix-solutions.png" alt="ecomatrix"
-                class="h-10 w-26 ">
-        </div>
-
-        <!-- Logout Button -->
-
-        <!-- inside your navbar -->
-        <div class="flex items-center gap-4">
-            <% if (!user) { %>
-                <a href="/api/v1/user/login" class="bg-blue-500 text-white px-4 py-2 rounded">Login</a>
-                <a href="/api/v1/user/register" class="bg-green-500 text-white px-4 py-2 rounded">Sign Up</a>
-                <% } else { %>
-                    <form action="/api/v1/user/logout" method="POST">
-                        <button class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
-                    </form>
-                    <% } %>
-        </div>
-
-    </nav>
-
-    <!-- Main Content -->
-    <div class="p-6 text-center">
-        <h1 class="text-3xl font-semibold mb-4 text-gray-800">Welcome to the ecoMatrix<br> this website is strictly for
-            the employees of ecomatrix <br> if you are employe please log in</h1>
-        <!-- <p class="text-gray-600">You are successfully logged in.</p> -->
-        <% if (user) { %>
-            <% if(user.role==="employ" ){%>
-                <a href="/api/v1/create" class="bg-green-500 py-2 px-10">create offer</a>
-            <%}%>
-            <% if(user.role==="admin" ){%>
-                <a href="/api/v1/all-offer" class="bg-green-500 py-2 px-10">show offer</a>
-            <%}%>
-        <% } %>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <div class="flex items-center gap-4">
+      <img onclick="window.location.href='/'"
+        src="https://4.imimg.com/data4/GJ/SY/MY-6614301/ecomatrix-solutions.png"
+        alt="Ecomatrix"
+        class="h-10 cursor-pointer" />
     </div>
+
+    <div class="flex items-center gap-4">
+      <% if (!user) { %>
+        <a href="/api/v1/user/login" class="bg-blue-500 text-white px-4 py-2 rounded">Login</a>
+        <a href="/api/v1/user/register" class="bg-green-500 text-white px-4 py-2 rounded">Sign Up</a>
+      <% } else { %>
+        <img
+          src="<%= user.profileImage || 'https://www.gravatar.com/avatar?d=mp&s=200' %>"
+          alt="Profile Image"
+          class="inline-block rounded-full border border-gray-400 shadow-md w-12 h-12 object-cover"
+        />
+        <form action="/api/v1/user/logout" method="POST">
+
+          <button class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+        </form>
+      <% } %>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="py-10 px-5 text-center">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">
+      Welcome to Ecomatrix
+    </h1>
+    
+
+    <% if (user) { %>
+      <!-- Profile Image -->
+      <div class="mb-6">
+        <!-- <img
+          src="<%= user.profileImage || 'https://www.gravatar.com/avatar?d=mp&s=200' %>"
+          alt="Profile Image"
+          class="inline-block rounded-full border border-gray-400 shadow-md w-24 h-24 object-cover"
+        /> -->
+        <p class="mt-2 font-semibold text-gray-700"><%= user.name %></p>
+        <!-- <p class="text-sm text-gray-500 capitalize"><%= user.role %></p> -->
+      </div>
+
+      <!-- Role-Based Actions -->
+      <% if (user.role === "employ") { %>
+        <a href="/api/v1/create" class="bg-green-500 text-white px-6 py-2 rounded shadow hover:bg-green-600 transition">
+          + Create Offer
+        </a>
+      <% } %>
+
+      <% if (user.role === "admin") { %>
+        <a href="/api/v1/all-offer" class="bg-blue-600 text-white px-6 py-2 rounded shadow hover:bg-blue-700 transition">
+          View All Offers
+        </a>
+      <% } %>
+    <% } %>
+  </main>
 
 </body>
 

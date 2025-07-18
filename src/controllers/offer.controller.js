@@ -78,7 +78,8 @@ const createOffer = asyncHandler(async (req, res) => {
     subTotal,
     taxPercentage,
     taxAmount,
-    grandTotal
+    grandTotal,
+    createdBy: req.user._id
   });
 
   const pdfData = {
@@ -119,6 +120,7 @@ const getOfferById = asyncHandler(async (req, res) => {
   });
   res.send(pdfBuffer);
 });
+
 
 
 
