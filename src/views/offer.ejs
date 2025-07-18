@@ -1,0 +1,104 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Offer</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .item-block { margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; }
+    .item-block label { display: inline-block; width: 120px; }
+  </style>
+</head>
+<body>
+  <h1>Create a New Project Offer</h1>
+
+  <form method="POST" action="/api/v1/create">
+    <!-- Project Details -->
+    <label>Project Name</label><br />
+    <input type="text" name="projectName" required /><br />
+
+    <label>Client Name</label><br />
+    <input type="text" name="clientName" required /><br />
+
+    <label>Project Location</label><br />
+    <input type="text" name="projectLocation" required /><br />
+
+    <label>No. of Towers</label><br />
+    <input type="number" name="numberOfTower" required /><br />
+
+    <label>Tower Name</label><br />
+    <input type="text" name="towerName" /><br />
+
+    <label>Type of Chute</label><br />
+    <input type="text" name="typeOfChute" required /><br />
+
+    <label>Material of Chute</label><br />
+    <input type="text" name="materialOfChute" required /><br />
+
+    <label>Diameter (mm)</label><br />
+    <input type="number" name="diameterOfChute" required /><br />
+
+    <label>Thickness (mm)</label><br />
+    <input type="number" name="thicknessOfChute" required /><br />
+
+    <label>No. of Openings</label><br />
+    <input type="number" name="numberOfOpening" required /><br />
+
+    <!-- Dynamic BOQ Items -->
+    <h3>Items</h3>
+    <div id="itemsContainer">
+      <!-- Initial item block -->
+      <div class="item-block" data-index="0">
+        <label>Item Name:</label>
+        <input type="text" name="items[0][itemName]" required />
+        <label>Description:</label>
+        <input type="text" name="items[0][description]" />
+        <label>Unit:</label>
+        <input type="text" name="items[0][unit]" />
+        <label>Qty:</label>
+        <input type="number" name="items[0][qty]" step="1" />
+        <label>Rate:</label>
+        <input type="number" name="items[0][rate]" step="0.01" />
+      </div>
+    </div>
+
+    <button type="button" onclick="addItem()">Add Another Item</button><br /><br />
+    <button type="submit">Generate Offer PDF</button>
+  </form>
+
+  <script>
+    let itemIndex = 1;
+
+    function addItem() {
+      const container = document.getElementById("itemsContainer");
+
+      const newBlock = document.createElement("div");
+      newBlock.className = "item-block";
+      newBlock.setAttribute("data-index", itemIndex);
+
+      newBlock.innerHTML = `
+        <label>Item Name:</label>
+        <input type="text" name="items[${itemIndex}][itemName]" required />
+        <label>Description:</label>
+        <input type="text" name="items[${itemIndex}][description]" />
+        <label>Unit:</label>
+        <input type="text" name="items[${itemIndex}][unit]" />
+        <label>Qty:</label>
+        <input type="number" name="items[${itemIndex}][qty]" step="1" />
+        <label>Rate:</label>
+        <input type="number" name="items[${itemIndex}][rate]" step="0.01" />
+        <button type="button" onclick="removeItem(this)">Remove</button>
+      `;
+
+      container.appendChild(newBlock);
+      itemIndex++;
+    }
+
+    function removeItem(button) {
+      button.parentElement.remove();
+    }
+  </script>
+</body>
+</html>

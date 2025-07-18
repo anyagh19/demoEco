@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <img onclick="window.location.href='/'"
+                src="https://4.imimg.com/data4/GJ/SY/MY-6614301/ecomatrix-solutions.png" alt="ecomatrix"
+                class="h-10 w-26 ">
+        </div>
+
+        <!-- Logout Button -->
+
+        <!-- inside your navbar -->
+        <div class="flex items-center gap-4">
+            <% if (!user) { %>
+                <a href="/api/v1/user/login" class="bg-blue-500 text-white px-4 py-2 rounded">Login</a>
+                <a href="/api/v1/user/register" class="bg-green-500 text-white px-4 py-2 rounded">Sign Up</a>
+                <% } else { %>
+                    <form action="/api/v1/user/logout" method="POST">
+                        <button class="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
+                    </form>
+                    <% } %>
+        </div>
+
+    </nav>
+
+    <!-- Main Content -->
+    <div class="p-6 text-center">
+        <h1 class="text-3xl font-semibold mb-4 text-gray-800">Welcome to the ecoMatrix<br> this website is strictly for
+            the employees of ecomatrix <br> if you are employe please log in</h1>
+        <!-- <p class="text-gray-600">You are successfully logged in.</p> -->
+         <% if(user.role === "employe"){%>
+            <a href="/api/v1/create" class="bg-green-500 py-2 px-10">create offer</a>
+         <%}%>
+         <% if(user.role === "admin"){%>
+            <a href="/api/v1/all-offer" class="bg-green-500 py-2 px-10">show offer</a>
+         <%}%>
+    </div>
+
+</body>
+
+</html>

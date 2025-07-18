@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-100 to-purple-200 min-h-screen flex items-center justify-center">
+
+  <div class="bg-white shadow-2xl rounded-2xl p-8 max-w-lg w-full">
+    <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+
+    <form action="/api/v1/user/register" method="POST"  enctype="multipart/form-data" class="space-y-4">
+      <!-- Full Name -->
+      <div>
+        <label for="fullName" class="block text-sm font-semibold text-gray-700">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required
+               class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-semibold text-gray-700">Email</label>
+        <input type="email" id="email" name="email" required
+               class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-semibold text-gray-700">Password</label>
+        <input type="password" id="password" name="password" required
+               class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Phone -->
+      <div>
+        <label for="phone" class="block text-sm font-semibold text-gray-700">Phone</label>
+        <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}"
+               class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Address -->
+      <div>
+        <label for="address" class="block text-sm font-semibold text-gray-700">Address</label>
+        <textarea id="address" name="address" required rows="2"
+                  class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+      </div>
+
+      <!-- Profile Image URL -->
+      <div>
+        <label for="profileImage" class="block text-sm font-semibold text-gray-700">Profile Image URL</label>
+        <input type="file" id="profileImage" name="profileImage" accept="image/*" required
+               class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+
+      <!-- Role Select -->
+      <div>
+        <label for="role" class="block text-sm font-semibold text-gray-700">Role</label>
+        <select id="role" name="role" required
+                class="w-full mt-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option value="">Select Role</option>
+          <option value="worker">Worker</option>
+          <option value="employ">Employ</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="pt-4">
+        <button type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-semibold transition duration-200">
+          Sign Up
+        </button>
+      </div>
+    </form>
+
+    <p class="mt-4 text-center text-sm text-gray-600">Already have an account?
+      <a href="/api/v1/user/login" class="text-blue-600 hover:underline">Login here</a>
+    </p>
+  </div>
+
+</body>
+</html>

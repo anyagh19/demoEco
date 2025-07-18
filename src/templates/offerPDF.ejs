@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Techno Commercial Offer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @page {
+      size: A4;
+      margin: 32pt;
+    }
+    body {
+      background: #fff;
+      margin: 0;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div class="mx-auto border-2 border-black w-[816px] min-h-[900px] my-8 bg-white p-6">
+  <!-- HEADER -->
+  <div class="flex items-start border-b border-black pb-1">
+    <img src="https://www.ecomatrix.in/images/logo.png" alt="Logo" class="h-12 w-auto pr-3" />
+    <div class="flex-1 text-center text-sm">
+      <h1 class="text-lg font-bold">Ecomatrix Solutions</h1>
+      <p class="leading-tight text-xs">
+        Registered Address: Flat no 3, Second Floor, Golande Building,<br>
+        Nr Chhatrapati Shivaji Maharaj Statue, Pimpri, Pune - 411017, Maharashtra, India
+      </p>
+    </div>
+  </div>
+
+  <!-- Contacts Line -->
+  <div class="flex justify-between items-center text-xs py-1 px-2 border-b border-black">
+    <span>Contact: +91 9766474241</span>
+    <span>Email: sachin@ecomatrix.in</span>
+    <span>Website: www.ecomatrix.in</span>
+  </div>
+
+  <!-- MAIN TITLE -->
+  <div class="text-center font-bold text-base py-3 border-b border-black uppercase">
+    Techno - Commercial Offer for Garbage Chutes System
+  </div>
+
+  <!-- Offer Info -->
+  <div class="flex justify-between text-sm py-2 px-2 border-b border-black">
+    <span>Proposal Ref No: GCS/<%= new Date().getFullYear() %>/<%= ('0' + (_id || 1)).slice(-2) %></span>
+    <span>Revision No: 2</span>
+    <span>Date: <%= (new Date()).toLocaleDateString('en-GB') %></span>
+  </div>
+
+  <!-- PROJECT DETAILS -->
+  <div class="bg-gray-100 font-semibold text-sm text-center py-1 border-y border-black mt-2">
+    PROJECT DETAILS
+  </div>
+  <table class="w-full text-xs border-collapse border-b border-black">
+    <tbody>
+      <tr>
+        <th class="border border-black bg-gray-100 px-2 py-1 text-left w-1/4">Client Name</th>
+        <td class="border border-black px-2"><%= clientName %></td>
+        <th class="border border-black bg-gray-100 px-2 py-1 text-left w-1/4">Type of Garbage Chutes</th>
+        <td class="border border-black px-2"><%= typeOfChute %></td>
+      </tr>
+      <tr>
+        <th class="border border-black bg-gray-100 px-2 py-1">Project Name</th>
+        <td class="border border-black px-2"><%= projectName %></td>
+        <th class="border border-black bg-gray-100 px-2 py-1">MOC of Garbage Chutes</th>
+        <td class="border border-black px-2"><%= materialOfChute %></td>
+      </tr>
+      <tr>
+        <th class="border border-black bg-gray-100 px-2 py-1">Project Location</th>
+        <td class="border border-black px-2"><%= projectLocation %></td>
+        <th class="border border-black bg-gray-100 px-2 py-1">Diameter of Chutes (mm)</th>
+        <td class="border border-black px-2"><%= diameterOfChute %></td>
+      </tr>
+      <tr>
+        <th class="border border-black bg-gray-100 px-2 py-1">No. of Towers</th>
+        <td class="border border-black px-2"><%= numberOfTower %></td>
+        <th class="border border-black bg-gray-100 px-2 py-1">Thickness (mm)</th>
+        <td class="border border-black px-2"><%= thicknessOfChute %></td>
+      </tr>
+      <tr>
+        <th class="border border-black bg-gray-100 px-2 py-1">Tower Name</th>
+        <td class="border border-black px-2"><%= towerName %></td>
+        <th class="border border-black bg-gray-100 px-2 py-1">No. of Openings</th>
+        <td class="border border-black px-2"><%= numberOfOpening %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- LETTER CONTENT -->
+  <div class=" text-xs p-4 mt-4 leading-relaxed">
+    <p><b>Kind Attn:</b> Mr. <%= clientName %></p>
+    <p><b>Subject:</b> Offer for Garbage Chute System</p>
+    <p>
+      Dear Sir,<br>
+      With reference to your requirement for the Garbage Chute System and our discussion with your goodself, we are pleased to submit our Techno-commercial proposal for the same.
+    </p>
+    <p>
+      We hope you find our proposal in line with your requirements and look forward to receiving your valued order at the earliest.
+    </p>
+    <p>Our offer consists of the following:</p>
+    <ol class="list-decimal pl-5 mt-1 space-y-0.5">
+      <li>Bill of Quantities</li>
+      <li>Commercial Terms</li>
+      <li>Client's Scope / Schedule of Exclusions</li>
+      <li>Other Terms</li>
+      <li>Few Esteemed Customers</li>
+    </ol>
+    <p class="mt-2">
+      Assuring you of our best services at all times. Kindly get in touch with us for any queries. Also, please visit our website www.ecomatrix.in to know more about us.
+    </p>
+    <p class="mt-4">
+      Thanks and Regards,<br><br>
+      Sachin Talreja<br>
+      Partner<br>
+      Mob No: +91 9766474241
+    </p>
+  </div>
+</div>
+
+<!-- PAGE BREAK -->
+<div class="page-break"></div>
+
+<!-- PAGE 2: BOQ SECTION -->
+<div class="mx-auto border-[2px] border-black w-[816px] min-h-[900px] mt-8 mb-8 p-6 bg-white">
+  <div class="text-base font-bold text-center  py-2 bg-gray-100">
+    1. BILL OF QUANTITIES (BOQ)
+  </div>
+  <table class="w-full text-xs border-collapse mt-3">
+    <thead class="bg-gray-100 font-semibold">
+      <tr>
+        <th class="border border-black px-2 py-1">Sr. No</th>
+        <th class="border border-black px-2 py-1">Item</th>
+        <th class="border border-black px-2 py-1">Description</th>
+        <th class="border border-black px-2 py-1">Unit</th>
+        <th class="border border-black px-2 py-1">Total Qty</th>
+        <th class="border border-black px-2 py-1">Rate (INR)</th>
+        <th class="border border-black px-2 py-1">Total Amount (INR)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% items.forEach((item, idx) => { %>
+        <tr class="<%= idx % 2 === 1 ? 'bg-gray-50' : '' %>">
+          <td class="border border-black text-center"><%= idx + 1 %></td>
+          <td class="border border-black"><%= item.itemName %></td>
+          <td class="border border-black"><%= item.description %></td>
+          <td class="border border-black text-center"><%= item.unit %></td>
+          <td class="border border-black text-center"><%= item.qty %></td>
+          <td class="border border-black text-right"><%= item.rate.toLocaleString() %></td>
+          <td class="border border-black text-right"><%= item.totalAmount.toLocaleString() %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+    <tfoot>
+      <tr class="bg-gray-100 font-semibold">
+        <td colspan="6" class="border border-black text-right">Sub Total</td>
+        <td class="border border-black text-right"><%= subTotal.toLocaleString() %></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="border border-black text-right">Tax (<%= taxPercentage %>%)</td>
+        <td class="border border-black text-right"><%= taxAmount.toLocaleString() %></td>
+      </tr>
+      <tr class="bg-gray-200 font-bold">
+        <td colspan="6" class="border border-black text-right">Grand Total</td>
+        <td class="border border-black text-right"><%= grandTotal.toLocaleString() %></td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+</body>
+</html>

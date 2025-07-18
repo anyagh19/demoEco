@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Offers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+  <div class="max-w-7xl mx-auto py-10 px-4">
+
+    <h1 class="text-2xl sm:text-4xl font-bold mb-8 text-center text-emerald-800 tracking-tight">All Techno Commercial Offers</h1>
+
+    <div class="overflow-x-auto shadow-md rounded-lg bg-white p-2">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-emerald-700">
+          <tr>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase tracking-wider">#</th>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase">Client</th>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase">Project Name</th>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase">Type</th>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase">Created At</th>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase">Updated At</th>
+            <th class="px-4 py-3 text-left text-xs font-bold text-white uppercase">Status</th>
+            <th class="px-4 py-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% offers.forEach((offer, idx) => { %>
+            <tr class="<%= idx % 2 === 0 ? 'bg-gray-50' : 'bg-white' %> hover:bg-emerald-100 transition-all">
+              <td class="px-4 py-3 font-semibold text-emerald-900"><%= idx + 1 %></td>
+              <td class="px-4 py-3"><%= offer.clientName %></td>
+              <td class="px-4 py-3 font-medium"><%= offer.projectName %></td>
+              <td class="px-4 py-3 text-xs"><%= offer.typeOfChute %></td>
+              <td class="px-4 py-3 text-xs text-gray-600"><%= new Date(offer.createdAt).toLocaleString() %></td>
+              <td class="px-4 py-3 text-xs text-gray-500"><%= new Date(offer.updatedAt).toLocaleString() %></td>
+              <td class="px-4 py-3">
+                <span class="
+                  inline-block px-2 py-1 rounded-full text-xs font-medium
+                  <% if (offer.status === 'Accepted') { %> bg-emerald-600 text-white
+                  <% } else if (offer.status === 'Rejected') { %> bg-red-500 text-white
+                  <% } else if (offer.status === 'Sent') { %> bg-yellow-400 text-gray-900
+                  <% } else { %> bg-gray-200 text-gray-800<% } %>
+                  ">
+                  <%= offer.status %>
+                </span>
+              </td>
+              <td class="px-4 py-3">
+                <!-- Example actions, update href as per your routes! -->
+                <a href="/api/v1/offer/<%= offer._id %>/pdf" target="_blank"
+                    class="hover:underline text-emerald-800 font-semibold text-xs">
+                    View PDF
+                  </a>
+                  
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% if (!offers || offers.length === 0) { %>
+        <div class="py-6 text-center text-gray-500 text-lg">No offers found.</div>
+      <% } %>
+    </div>
+
+    <!-- <div class="mt-8 flex justify-center">
+      <a href="/api/v1/create" class="px-6 py-2 bg-emerald-700 hover:bg-emerald-800 text-white rounded-lg shadow font-bold text-lg transition">+ New Offer</a>
+    </div> -->
+
+  </div>
+
+</body>
+</html>
