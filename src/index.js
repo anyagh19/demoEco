@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { connect } from './db/index.js';
 
 
-const PORT = 300
+const PORT = 3000
 ;
 
 connect()
