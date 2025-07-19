@@ -1,5 +1,5 @@
 import{ Router} from 'express'
-import{ createOffer, getOffer, getOfferById} from '../controllers/offer.controller.js'
+import{ createOffer, getOffer, getOfferById, getOfferByUserId} from '../controllers/offer.controller.js'
 import { verifyJWT } from '../middleware/auth.middleware.js'
 
 
@@ -32,6 +32,10 @@ router.route("/create")
 
 router.route("/all-offer")
    .get(getOffer)
+
+router.route("/my-offer")
+    .get(verifyJWT, getOfferByUserId)
+    
 
 router.get('/offer/:id/pdf', getOfferById);
 

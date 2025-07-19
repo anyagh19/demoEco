@@ -1,101 +1,101 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Create Offer</title>
-  <style>
-    body { font-family: Arial, sans-serif; }
-    .item-block { margin-bottom: 1rem; padding: 0.5rem; border: 1px solid #ccc; }
-    .item-block label { display: inline-block; width: 120px; }
-  </style>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>Create a New Project Offer</h1>
-
-  <form method="POST" action="/api/v1/create">
+<body class="bg-gray-50 min-h-screen py-8">
+  <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Create a New Project Offer</h1>
+  <form method="POST" action="/api/v1/create" class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg space-y-6">
     <!-- Project Details -->
-    <label>Project Name</label><br />
-    <input type="text" name="projectName" required /><br />
-
-    <label>Client Name</label><br />
-    <input type="text" name="clientName" required /><br />
-
-    <label>Project Location</label><br />
-    <input type="text" name="projectLocation" required /><br />
-
-    <label>No. of Towers</label><br />
-    <input type="number" name="numberOfTower" required /><br />
-
-    <label>Tower Name</label><br />
-    <input type="text" name="towerName" /><br />
-
-    <label>Type of Chute</label><br />
-    <input type="text" name="typeOfChute" required /><br />
-
-    <label>Material of Chute</label><br />
-    <input type="text" name="materialOfChute" required /><br />
-
-    <label>Diameter (mm)</label><br />
-    <input type="number" name="diameterOfChute" required /><br />
-
-    <label>Thickness (mm)</label><br />
-    <input type="number" name="thicknessOfChute" required /><br />
-
-    <label>No. of Openings</label><br />
-    <input type="number" name="numberOfOpening" required /><br />
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Project Name</label>
+      <input type="text" name="projectName" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Client Name</label>
+      <input type="text" name="clientName" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Project Location</label>
+      <input type="text" name="projectLocation" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">No. of Towers</label>
+      <input type="number" name="numberOfTower" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Tower Name</label>
+      <input type="text" name="towerName" class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Type of Chute</label>
+      <input type="text" name="typeOfChute" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Material of Chute</label>
+      <input type="text" name="materialOfChute" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Diameter (mm)</label>
+      <input type="number" name="diameterOfChute" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">Thickness (mm)</label>
+      <input type="number" name="thicknessOfChute" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
+    <div>
+      <label class="block text-gray-600 font-semibold mb-1">No. of Openings</label>
+      <input type="number" name="numberOfOpening" required class="w-full border rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+    </div>
 
     <!-- Dynamic BOQ Items -->
-    <h3>Items</h3>
+    <h3 class="text-xl font-semibold text-gray-700 border-b pb-2 mb-4">Items</h3>
     <div id="itemsContainer">
-      <!-- Initial item block -->
-      <div class="item-block" data-index="0">
-        <label>Item Name:</label>
-        <input type="text" name="items[0][itemName]" required />
-        <label>Description:</label>
-        <input type="text" name="items[0][description]" />
-        <label>Unit:</label>
-        <input type="text" name="items[0][unit]" />
-        <label>Qty:</label>
-        <input type="number" name="items[0][qty]" step="1" />
-        <label>Rate:</label>
-        <input type="number" name="items[0][rate]" step="0.01" />
+      <div class="item-block bg-blue-50 p-4 rounded-lg mb-4 flex flex-wrap gap-2" data-index="0">
+        <label class="w-24 text-gray-600 mt-2">Item Name:</label>
+        <input type="text" name="items[0][itemName]" required class="flex-1 border rounded px-2 py-1" />
+        <label class="w-24 text-gray-600 mt-2">Description:</label>
+        <input type="text" name="items[0][description]" class="flex-1 border rounded px-2 py-1" />
+        <label class="w-16 text-gray-600 mt-2">Unit:</label>
+        <input type="text" name="items[0][unit]" class="w-24 border rounded px-2 py-1" />
+        <label class="w-12 text-gray-600 mt-2">Qty:</label>
+        <input type="number" name="items[0][qty]" step="1" class="w-24 border rounded px-2 py-1" />
+        <label class="w-16 text-gray-600 mt-2">Rate:</label>
+        <input type="number" name="items[0][rate]" step="0.01" class="w-24 border rounded px-2 py-1" />
       </div>
     </div>
 
-    <button type="button" onclick="addItem()">Add Another Item</button><br /><br />
-    <button type="submit">Generate Offer PDF</button>
+    <button type="button" onclick="addItem()" class="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded shadow">Add Another Item</button>
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg float-right">Generate Offer PDF</button>
   </form>
 
   <script>
     let itemIndex = 1;
-
     function addItem() {
       const container = document.getElementById("itemsContainer");
-
       const newBlock = document.createElement("div");
-      newBlock.className = "item-block";
+      newBlock.className = "item-block bg-blue-50 p-4 rounded-lg mb-4 flex flex-wrap gap-2";
       newBlock.setAttribute("data-index", itemIndex);
 
       newBlock.innerHTML = `
-        <label>Item Name:</label>
-        <input type="text" name="items[${itemIndex}][itemName]" required />
-        <label>Description:</label>
-        <input type="text" name="items[${itemIndex}][description]" />
-        <label>Unit:</label>
-        <input type="text" name="items[${itemIndex}][unit]" />
-        <label>Qty:</label>
-        <input type="number" name="items[${itemIndex}][qty]" step="1" />
-        <label>Rate:</label>
-        <input type="number" name="items[${itemIndex}][rate]" step="0.01" />
-        <button type="button" onclick="removeItem(this)">Remove</button>
+        <label class="w-24 text-gray-600 mt-2">Item Name:</label>
+        <input type="text" name="items[${itemIndex}][itemName]" required class="flex-1 border rounded px-2 py-1" />
+        <label class="w-24 text-gray-600 mt-2">Description:</label>
+        <input type="text" name="items[${itemIndex}][description]" class="flex-1 border rounded px-2 py-1" />
+        <label class="w-16 text-gray-600 mt-2">Unit:</label>
+        <input type="text" name="items[${itemIndex}][unit]" class="w-24 border rounded px-2 py-1" />
+        <label class="w-12 text-gray-600 mt-2">Qty:</label>
+        <input type="number" name="items[${itemIndex}][qty]" step="1" class="w-24 border rounded px-2 py-1" />
+        <label class="w-16 text-gray-600 mt-2">Rate:</label>
+        <input type="number" name="items[${itemIndex}][rate]" step="0.01" class="w-24 border rounded px-2 py-1" />
+        <button type="button" onclick="removeItem(this)" class="bg-red-500 hover:bg-red-600 text-white font-bold px-2 py-1 rounded ml-2">Remove</button>
       `;
-
       container.appendChild(newBlock);
       itemIndex++;
     }
-
     function removeItem(button) {
       button.parentElement.remove();
     }

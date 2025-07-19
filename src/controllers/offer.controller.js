@@ -121,12 +121,16 @@ const getOfferById = asyncHandler(async (req, res) => {
   res.send(pdfBuffer);
 });
 
-
-
+const getOfferByUserId = asyncHandler ( async ( req , res) => {
+  const offers = await Offer.find({ createdBy: req.user._id })
+  
+  return res.render("allOffer", {offers})
+})
 
 export {
   createOffer,
   generatePDF,
   getOffer,
-  getOfferById
+  getOfferById,
+  getOfferByUserId
 }
