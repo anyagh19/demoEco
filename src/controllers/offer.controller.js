@@ -25,7 +25,7 @@ const generatePDF = async (data) => {
     // ====== PAGE 1 ======
 
     // Header: Logo & Company Info
-    doc.image('public/logo.png', 50, 50, { width: 80 }); // Replace with path to your server logo
+    doc.image('public/12577-comp-image.png', 50, 50, { width: 80 }); // Replace with path to your server logo
     doc.fontSize(18).text('Ecomatrix Solutions', 150, 50, { align: 'center' });
     doc.fontSize(10).text(
       'Registered Address: Flat no 3, Second Floor, Golande Building,\nNear Chhatrapati Shivaji Maharaj Statue, Pimpri, Pune - 411017, Maharashtra, India',
