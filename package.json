@@ -21,6 +21,7 @@
     "dotenv": "^17.1.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "get-stream": "^9.0.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.2",
     "multer": "^2.0.1",
