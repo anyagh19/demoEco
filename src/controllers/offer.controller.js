@@ -3,29 +3,34 @@ import { Offer } from "../models/offer.model.js";
 import apiError from '../utils/apiError.js';
 import { asyncHandler } from "../utils/asyncHandler.js";
 import PDFDocument from 'pdfkit';
-// import { Readable } from 'stream';
-// import getStream from 'get-stream';
+import path from 'path';
+import fs from 'fs';
 
 // Helper: Format number with commas
 const formatCurrency = (n) => n?.toLocaleString('en-IN', { maximumFractionDigits: 2 });
 
 const generatePDF = async (data) => {
   const doc = new PDFDocument({ size: 'A4', margin: 50 });
-
-  // Collect chunks of PDF as buffer
   const buffers = [];
   doc.on('data', buffers.push.bind(buffers));
 
   return new Promise((resolve, reject) => {
     doc.on('end', () => {
-      const pdfBuffer = Buffer.concat(buffers);
-      resolve(pdfBuffer);
+      resolve(Buffer.concat(buffers));
     });
 
-    // ====== PAGE 1 ======
+    // ========== PAGE 1 ==========
 
-    // Header: Logo & Company Info
-    doc.image('public/12577-comp-image.png', 50, 50, { width: 80 }); // Replace with path to your server logo
+    // Absolute path to logo
+    const logoPath = path.join(process.cwd(), 'public', '12577-comp-image.png');
+    if (fs.existsSync(logoPath)) {
+      doc.image(logoPath, 50, 50, { width: 80 });
+    } else {
+      console.warn('Logo image not found:', logoPath);
+      // You may add a fallback image or skip
+    }
+
+    // Header: Company Info
     doc.fontSize(18).text('Ecomatrix Solutions', 150, 50, { align: 'center' });
     doc.fontSize(10).text(
       'Registered Address: Flat no 3, Second Floor, Golande Building,\nNear Chhatrapati Shivaji Maharaj Statue, Pimpri, Pune - 411017, Maharashtra, India',
@@ -35,7 +40,6 @@ const generatePDF = async (data) => {
     doc.fontSize(9).text('Contact: +91 9766474241   |   Email: sachin@ecomatrix.in   |   www.ecomatrix.in', {
       align: 'center'
     });
-
     doc.moveDown().moveDown();
 
     // Title
@@ -43,18 +47,14 @@ const generatePDF = async (data) => {
       .fontSize(14)
       .font('Helvetica-Bold')
       .text('Techno - Commercial Offer for Garbage Chutes System', { align: 'center', underline: true });
-
     doc.moveDown();
 
     // Offer Details (Ref No., Date, etc.)
     const offerIdShort = data._id?.toString().slice(-3) || '001';
     doc.fontSize(10);
-    doc.text(`Proposal Ref No: GCS/${new Date().getFullYear()}/${offerIdShort}`, { continued: true }).text('   ', {
-      continued: true
-    });
+    doc.text(`Proposal Ref No: GCS/${new Date().getFullYear()}/${offerIdShort}`, { continued: true }).text('   ', { continued: true });
     doc.text(`Revision No: 2`, { continued: true }).text('   ');
     doc.text(`Date: ${new Date().toLocaleDateString('en-GB')}`);
-
     doc.moveDown();
 
     // PROJECT DETAILS
@@ -81,7 +81,6 @@ const generatePDF = async (data) => {
     detailRow('Tower Name', data.towerName, 'No. of Openings', data.numberOfOpening);
 
     doc.moveDown();
-
     doc
       .fontSize(10)
       .font('Helvetica')
@@ -99,7 +98,7 @@ const generatePDF = async (data) => {
       { align: 'left' }
     );
 
-    // ===== PAGE BREAK for BOQ =====
+    // ========== PAGE 2: BOQ ==========
     doc.addPage();
 
     doc
@@ -110,12 +109,7 @@ const generatePDF = async (data) => {
 
     // Table headers
     const tableTop = doc.y + 10;
-    const itemX = 60;
-    const descX = 130;
-    const unitX = 320;
-    const qtyX = 370;
-    const rateX = 430;
-    const amountX = 500;
+    const itemX = 60, descX = 130, unitX = 320, qtyX = 370, rateX = 430, amountX = 500;
 
     doc.fontSize(10).font('Helvetica-Bold');
     doc.text('Sr.', itemX, tableTop);
@@ -141,7 +135,6 @@ const generatePDF = async (data) => {
       doc.text(formatCurrency(item.rate), rateX, y, { align: 'right' });
       doc.text(formatCurrency(item.totalAmount), amountX, y, { align: 'right' });
       y += 20;
-
       if (y > 700) {
         doc.addPage();
         y = 60;
@@ -171,9 +164,7 @@ const generatePDF = async (data) => {
 };
 
 
-
-
-
+// ================ CONTROLLERS ================
 const createOffer = asyncHandler(async (req, res) => {
   const {
     projectName,
@@ -197,7 +188,6 @@ const createOffer = asyncHandler(async (req, res) => {
     const qty = Number(item.qty) || 0;
     const rate = Number(item.rate) || 0;
     const totalAmount = qty * rate;
-
     return {
       itemName: item.itemName,
       description: item.description,
@@ -242,19 +232,16 @@ const createOffer = asyncHandler(async (req, res) => {
   res.send(pdfBuffer);
 });
 
-
 const getOffer = asyncHandler(async (req, res) => {
   const offers = await Offer.find().sort({ createdAt: -1 });
   return res.status(200).render("allOffer", { offers });
 });
-
 
 const getOfferById = asyncHandler(async (req, res) => {
   const offer = await Offer.findById(req.params.id);
   if (!offer) {
     throw new apiError(404, "Offer not found");
   }
-
   const pdfData = { ...offer.toObject() };
   const pdfBuffer = await generatePDF(pdfData);
 
@@ -265,12 +252,10 @@ const getOfferById = asyncHandler(async (req, res) => {
   res.send(pdfBuffer);
 });
 
-
 const getOfferByUserId = asyncHandler(async (req, res) => {
   const offers = await Offer.find({ createdBy: req.user._id });
   return res.render("allOffer", { offers });
 });
-
 
 export {
   createOffer,
